@@ -28,6 +28,7 @@ describe('Server Routes', () => {
         .expect(200)
         .expect('content-type', /html/)
     })
+
     it('should render form with action of "/pokemon"', async () => {
       const res = await request(app)
         .get('/')
@@ -35,6 +36,7 @@ describe('Server Routes', () => {
       const { window: { document } } = new JSDOM(res.text)
       expect(document.querySelector('form')).to.exist
     })
+    
     it('should return input element with name attribute of "name"', async () => {
       const res = await request(app)
         .get('/')
@@ -42,7 +44,6 @@ describe('Server Routes', () => {
       const { window: { document } } = new JSDOM(res.text)
       expect(document.getElementsByTagName('input')).to.exist
     })
-
 
 
   })
@@ -60,12 +61,14 @@ describe('Server Routes', () => {
       nock.cleanAll()
       nock.enableNetConnect()
     })
+
     it('should redirect to / if name query param not included', async () => {
       await request(app)
         .get('/pokemon')
         .expect(302)
         .expect('location', '/')
     })
+
     it('/pokemon?name=pokemonName should render pokemon name', async () => {
       const res = await request(app)
         .get('/pokemon?name=banana')

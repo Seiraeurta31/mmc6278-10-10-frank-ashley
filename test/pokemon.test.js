@@ -54,11 +54,11 @@ describe('pokemon api util', () => {
       expect(axiosStub.called).to.be.true
       expect(axiosStub.firstCall.args[0].includes('gengar')).to.be.true
     })
+    
     it('should return pokemon name', async () => {
       const pokemonData = await getPokemon('gengar')
       expect(pokemonData.name).to.eq(POKEMON_RESPONSE.name)
     })
-
 
     it('should return pokemon official artwork sprite', async () => {
       const pokemonData = await getPokemon('gengar')
